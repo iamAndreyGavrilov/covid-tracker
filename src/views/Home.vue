@@ -28,7 +28,7 @@ export default {
         this.dataDate = data.Date;
         this.stats = data.Global;
         this.countries = data.Countries;
-        this.loading = true;
+        this.loading = false;
       } catch (error) {
         console.error("Ошибка", error);
       }
