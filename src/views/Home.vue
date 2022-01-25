@@ -2,6 +2,7 @@
   <main v-if="!loading">
     <DataTitle :text="title" :dataDate="dataDate" />
     <DataBoxes :stats="stats" />
+    <CountrySelect @get-country="getCountryData" :countries="countries" />
   </main>
   <main v-else class="flex flex-col justify-center content-center text-center">
     <h2 class="text-gray-500 text-3xl mt-10 mb-6">Получение данных</h2>
@@ -13,6 +14,7 @@
 import { fetchCovidData } from "@/api";
 import DataTitle from "@/components/DataTitle.vue";
 import DataBoxes from "@/components/DataBoxes.vue";
+import CountrySelect from "@/components/CountrySelect.vue";
 
 export default {
   name: "Home",
@@ -26,7 +28,7 @@ export default {
       loadingImage: require("@/assets/spinner.gif"),
     };
   },
-  components: { DataTitle, DataBoxes },
+  components: { DataTitle, DataBoxes, CountrySelect },
   methods: {
     async getCovid() {
       try {
@@ -38,6 +40,10 @@ export default {
       } catch (error) {
         console.error("Ошибка", error);
       }
+    },
+    getCountryData(country) {
+      this.stats = country;
+      this.title = country.Country;
     },
   },
   mounted() {
