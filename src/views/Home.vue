@@ -1,6 +1,7 @@
 <template>
   <main v-if="!loading">
     <DataTitle :text="title" :dataDate="dataDate" />
+    <DataBoxes :stats="stats" />
   </main>
   <main v-else class="flex flex-col justify-center content-center text-center">
     <h2 class="text-gray-500 text-3xl mt-10 mb-6">Получение данных</h2>
@@ -11,6 +12,7 @@
 <script>
 import { fetchCovidData } from "@/api";
 import DataTitle from "@/components/DataTitle.vue";
+import DataBoxes from "@/components/DataBoxes.vue";
 
 export default {
   name: "Home",
@@ -24,7 +26,7 @@ export default {
       loadingImage: require("@/assets/spinner.gif"),
     };
   },
-  components: { DataTitle },
+  components: { DataTitle, DataBoxes },
   methods: {
     async getCovid() {
       try {
