@@ -1,5 +1,7 @@
 <template>
-  <main v-if="!loading">Show data</main>
+  <main v-if="!loading">
+    <DataTitle :text="title" :dataDate="dataDate" />
+  </main>
   <main v-else class="flex flex-col justify-center content-center text-center">
     <h2 class="text-gray-500 text-3xl mt-10 mb-6">Получение данных</h2>
     <img :src="loadingImage" alt="loading" class="w-24 m-auto" />
@@ -8,6 +10,8 @@
 
 <script>
 import { fetchCovidData } from "@/api";
+import DataTitle from "@/components/DataTitle.vue";
+
 export default {
   name: "Home",
   data() {
@@ -20,7 +24,7 @@ export default {
       loadingImage: require("@/assets/spinner.gif"),
     };
   },
-  components: {},
+  components: { DataTitle },
   methods: {
     async getCovid() {
       try {
