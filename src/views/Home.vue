@@ -3,6 +3,13 @@
     <DataTitle :text="title" :dataDate="dataDate" />
     <DataBoxes :stats="stats" />
     <CountrySelect @get-country="getCountryData" :countries="countries" />
+    <button
+      @click="clearCountryData"
+      v-if="stats.Country"
+      class="bg-green-700 text-white rounded p-3 mt-10 focus:outline-none hover:bg-green-600"
+    >
+      Clear Country
+    </button>
   </main>
   <main v-else class="flex flex-col justify-center content-center text-center">
     <h2 class="text-gray-500 text-3xl mt-10 mb-6">Получение данных</h2>
@@ -44,6 +51,11 @@ export default {
     getCountryData(country) {
       this.stats = country;
       this.title = country.Country;
+    },
+    clearCountryData() {
+      this.loading = true;
+      this.getCovid();
+      this.title = "Global";
     },
   },
   mounted() {
